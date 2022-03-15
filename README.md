@@ -1,5 +1,5 @@
 # BachelorThesis
-Bachelor Thesis for "Computer Science – Software and Information Engineering" at FH Vorarlberg. Topic: "Counting &amp; Classification of Eggs using Object Recognition &amp; Computer Vision"
+Bachelor Thesis for "Computer Science – Software and Information Engineering" at FH Vorarlberg. Topic: "Counting &amp; Classification of Eggs using Object Detection &amp; Computer Vision"
 
 Ideas: 
 * https://github.com/ahmetozlu/color_recognition
