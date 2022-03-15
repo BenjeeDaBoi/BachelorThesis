@@ -27,7 +27,7 @@ while rval:
     if cv2.getWindowProperty(windowName, cv2.WND_PROP_VISIBLE) < 1:
         break
 
-np.savetxt("./output.txt", frame.reshape((3,-1)), fmt="%s", header=str(frame.shape))
+# np.savetxt("./output.txt", frame.reshape((3,-1)), fmt="%s", header=str(frame.shape))
 
 webcam.release()
 
