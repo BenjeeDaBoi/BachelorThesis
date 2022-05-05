@@ -5,3 +5,4 @@
 * Wann legen die Hennen Eier? (Bei Licht, Ohne Licht?)
 * Wann nimmt Patrick die Eier weg?
 * Wenn ohne Licht, wie Farbe erkennen (Wärmebild-Kamera mit Wärmebildsignatur)?
+* Video Feed hat sich um 20:30 auf Grau gestellt und um 21:00 ausgeschaltet (Method SETUP failed: 406 Not Acceptable)
