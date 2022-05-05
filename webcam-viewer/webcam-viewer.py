@@ -1,39 +1,58 @@
-import cv2 # pip install opencv-python
-import os
+from threading import Thread
+from time import sleep
 from dotenv import load_dotenv # pip install python-dotenv
 
-windowName = "Webcam View Eggs"
+import cv2 # pip install opencv-python
+import os
 
-load_dotenv()
-WEBCAM_RTSP_LINK = os.getenv('WEBCAM_RTSP_LINK')
 
-cv2.namedWindow(windowName, cv2.WINDOW_AUTOSIZE)
-webcam = cv2.VideoCapture(WEBCAM_RTSP_LINK)
-
-frame = None
-
-if webcam.isOpened(): # try to get the first frame
-    rval, frame = webcam.read()
-else:
-    rval = False
-
-while rval:
+class WebcamViewer:
     
-    frame = cv2.resize(frame, (854, 480))
+    windowName = "Webcam View Eggs"
+    webcamFeed = None
+    WEBCAM_RTSP_LINK = None
+    reconnectThread = None
     
-    cv2.imshow(windowName, frame)
-    rval, frame = webcam.read()
-    key = cv2.waitKey(17)
-    
-    if key == 27: # exit on ESC
-        break
-    
-    if cv2.getWindowProperty(windowName, cv2.WND_PROP_VISIBLE) < 1:
-        break
+    def __init__(self):
+        
+        load_dotenv()
+        self.WEBCAM_RTSP_LINK = os.getenv('WEBCAM_RTSP_LINK')
+        
+        self.__connectToRTSPStream__()
+        
+        
+    def __connectToRTSPStream__(self):
+        
+        cv2.namedWindow(self.windowName, cv2.WINDOW_AUTOSIZE)
+        self.webcamFeed = cv2.VideoCapture(self.WEBCAM_RTSP_LINK, cv2.CAP_FFMPEG)
+        self.__handleWebcamFeed__()
+        
+    def __handleWebcamFeed__(self):
+        
+        rval, frame = self.webcamFeed.read()
+        closeProgram = False
+        
+        while rval:
+            
+            frame = cv2.resize(frame, (854, 480))
+            
+            cv2.imshow(self.windowName, frame)
+            rval, frame = self.webcamFeed.read()
+            
+            if cv2.waitKey(17) == 27:
+                closeProgram = True
+                break
+            
+            if cv2.getWindowProperty(self.windowName, cv2.WND_PROP_VISIBLE) < 1:
+                break
+        
+        cv2.destroyAllWindows()
+        self.webcamFeed.release()
+        
+        # If program was closed wrongly
+        if closeProgram == False:
+            print("[ERROR] RTSP Stream was closed wrongly, restarting RTSP Stream . . .")
+            self.__connectToRTSPStream__()
+        
 
-# np.savetxt("./output.txt", frame.reshape((3,-1)), fmt="%s", header=str(frame.shape))
-
-webcam.release()
-
-if cv2.getWindowProperty(windowName, cv2.WND_PROP_VISIBLE) > 0:
-    cv2.destroyWindow(windowName)
+test = WebcamViewer()
