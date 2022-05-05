@@ -1,12 +1,14 @@
 import cv2 # pip install opencv-python
-import numpy as np
+import os
+from dotenv import load_dotenv # pip install dotenv
 
 windowName = "Webcam View Eggs"
 
+load_dotenv()
+WEBCAM_RTSP_LINK = os.getenv('WEBCAM_RTSP_LINK')
+
 cv2.namedWindow(windowName, cv2.WINDOW_AUTOSIZE)
-webcam = cv2.VideoCapture(0, cv2.CAP_DSHOW) # 0 can also be URL of video stream !
-# webcam.set(3, 320)
-# webcam.set(4, 240)
+webcam = cv2.VideoCapture(WEBCAM_RTSP_LINK)
 
 frame = None
 
@@ -16,6 +18,8 @@ else:
     rval = False
 
 while rval:
+    
+    frame = cv2.resize(frame, (854, 480))
     
     cv2.imshow(windowName, frame)
     rval, frame = webcam.read()
