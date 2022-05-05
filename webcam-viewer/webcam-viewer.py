@@ -1,5 +1,6 @@
 from threading import Thread
 from dotenv import load_dotenv
+from time import sleep
 
 import cv2
 import os
@@ -21,51 +22,43 @@ class WebcamViewer:
         load_dotenv()
         self.WEBCAM_RTSP_LINK = os.getenv('WEBCAM_RTSP_LINK')
         
-        self.__connectToRTSPStream__()
+        self.__connectHandleWebcamFeed__()
         
+    def __connectHandleWebcamFeed__(self):
         
-    def __connectToRTSPStream__(self):
-        
-        if self.webcamFeed == None:
-            cv2.namedWindow(self.windowName, cv2.WINDOW_AUTOSIZE)
-            
-        self.webcamFeed = cv2.VideoCapture(self.WEBCAM_RTSP_LINK, cv2.CAP_FFMPEG)
-        self.__handleWebcamFeed__()
-        
-    def __handleWebcamFeed__(self):
-        
-        rval, frame = self.webcamFeed.read()
+        # Crash Handling
         closeProgram = False
-        
-        while rval:
-                
-            frame = cv2.resize(frame, (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
-                
-            cv2.imshow(self.windowName, frame)
+        while closeProgram == False:
+            
+            cv2.namedWindow(self.windowName, cv2.WINDOW_AUTOSIZE)
+            self.webcamFeed = cv2.VideoCapture(self.WEBCAM_RTSP_LINK, cv2.CAP_FFMPEG)
+            
             rval, frame = self.webcamFeed.read()
             
-            if cv2.waitKey(17) == 27 or cv2.getWindowProperty(self.windowName, cv2.WND_PROP_VISIBLE) < 1:
-                closeProgram = True
-                break
-        
-        # If program was closed wrongly
-        if closeProgram == False:
-            # Current Bug: Recursion Error - Fix: Use another loop with closeProgram instead :)
-            print("[ERROR] RTSP Stream was closed wrongly, restarting RTSP Stream . . .")
-            self.__connectToRTSPStream__()
-        else:
-            print("[DEBUG] Ending RTSP Stream . . .")
-            self.webcamFeed.release()
+            while rval:
+                    
+                frame = cv2.resize(frame, (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
+                    
+                cv2.imshow(self.windowName, frame)
+                rval, frame = self.webcamFeed.read()
+                
+                if cv2.waitKey(17) == 27 or cv2.getWindowProperty(self.windowName, cv2.WND_PROP_VISIBLE) < 1:
+                    closeProgram = True
+                    break
             
-            print("[DEBUG] Destroying all open windows . . .")
-            cv2.destroyAllWindows()
+            # If program was closed wrongly
+            if closeProgram == False:
+                print("[ERROR] Not Connection to RTSP Stream, reconnecting in 3 seconds. . .")
+                sleep(3)
+            else:
+                print("[DEBUG] Ending RTSP Stream . . .")
+                self.webcamFeed.release()
+                
+                print("[DEBUG] Destroying all open windows . . .")
+                cv2.destroyAllWindows()
 
-            print("[DEBUG] Ending program . . .")
-            exit()
-            
-    def __drawReconnectOnWindow(self):
-        pass
-        
-        
+                print("[DEBUG] Ending program . . .")
+                exit()
+                    
 
 test = WebcamViewer()
