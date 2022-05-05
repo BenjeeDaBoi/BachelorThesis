@@ -8,10 +8,9 @@ import os
 
 class WebcamViewer:
     
-    windowName = "Webcam View Eggs"
+    windowName = "PatEggAI v0.2 - by Benjamin Hartmann"
     webcamFeed = None
     WEBCAM_RTSP_LINK = None
-    reconnectThread = None
     
     def __init__(self):
         
