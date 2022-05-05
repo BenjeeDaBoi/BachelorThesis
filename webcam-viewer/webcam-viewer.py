@@ -1,15 +1,19 @@
 from threading import Thread
-from time import sleep
-from dotenv import load_dotenv # pip install python-dotenv
+from dotenv import load_dotenv
 
-import cv2 # pip install opencv-python
+import cv2
 import os
 
 
 class WebcamViewer:
+
+    ### Resolution: 720p ###
+    WINDOW_WIDTH     = 1280
+    WINDOW_HEIGHT    = 720
     
-    windowName = "PatEggAI v0.2 - by Benjamin Hartmann"
-    webcamFeed = None
+    ### Important Attributes ###
+    windowName       = "PatEggAI v0.2 - by Benjamin Hartmann"
+    webcamFeed       = None
     WEBCAM_RTSP_LINK = None
     
     def __init__(self):
@@ -34,9 +38,9 @@ class WebcamViewer:
         closeProgram = False
         
         while rval:
-            
-            frame = cv2.resize(frame, (854, 480))
-            
+                
+            frame = cv2.resize(frame, (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
+                
             cv2.imshow(self.windowName, frame)
             rval, frame = self.webcamFeed.read()
             
@@ -57,6 +61,10 @@ class WebcamViewer:
 
             print("[DEBUG] Ending program . . .")
             exit()
+            
+    def __drawReconnectOnWindow(self):
+        pass
+        
         
 
 test = WebcamViewer()
