@@ -50,6 +50,7 @@ class WebcamViewer:
         
         # If program was closed wrongly
         if closeProgram == False:
+            # Current Bug: Recursion Error - Fix: Use another loop with closeProgram instead :)
             print("[ERROR] RTSP Stream was closed wrongly, restarting RTSP Stream . . .")
             self.__connectToRTSPStream__()
         else:
