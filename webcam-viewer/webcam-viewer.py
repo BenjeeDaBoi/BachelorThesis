@@ -1,6 +1,6 @@
 import cv2 # pip install opencv-python
 import os
-from dotenv import load_dotenv # pip install dotenv
+from dotenv import load_dotenv # pip install python-dotenv
 
 windowName = "Webcam View Eggs"
 
