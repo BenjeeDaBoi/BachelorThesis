@@ -1,0 +1,7 @@
+* Wie viele Hennen hat Patrick?
+* Welche Farben haben die Hühner?
+* Wie viele Eier legen die Hennen pro Tag?
+* Gibt es ähnliche Eier in der Farbe?
+* Wann legen die Hennen Eier? (Bei Licht, Ohne Licht?)
+* Wann nimmt Patrick die Eier weg?
+* Wenn ohne Licht, wie Farbe erkennen (Wärmebild-Kamera mit Wärmebildsignatur)?
