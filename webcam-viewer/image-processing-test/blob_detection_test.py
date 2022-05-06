@@ -18,6 +18,8 @@ params.filterByCircularity = True
 params.minCircularity = 0.7
 
 # Blob Detection doesn't work well on this type of image yet...
+# This doesn't work properly on Black & White Scaling!
+
 im = cv2.imread("./bw_erosion_histeq_threshold_220_255.png") # full_egg_bw_erosion_histeq_threshold_80_255.png
 im = (255-im) # Invert for blob detection (only takes black pixels, not white pixels)
 
