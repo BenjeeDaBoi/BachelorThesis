@@ -1,7 +1,7 @@
 from threading import Thread
 from dotenv import load_dotenv
 from datetime import datetime
-from time import sleep
+import time
 
 import cv2
 import os
@@ -27,6 +27,10 @@ class WebcamViewer:
         
     def __connectHandleWebcamFeed__(self):
         
+        # Frame Counter
+        i = 1
+        fps = 0
+        
         # Crash Handling
         closeProgram = False
         while closeProgram == False:
@@ -36,18 +40,27 @@ class WebcamViewer:
             
             print("[DEBUG] [", datetime.now().strftime('%H:%M:%S'), "] Connection to RTSP established")
             
-            rval, frame = self.webcamFeed.read()
+            startTime = 0
             
-            while rval:
-                    
+            while True:
+                
+                startTime = time.time()
+                rval, frame = self.webcamFeed.read()
+                if rval == None:
+                    break
+            
                 frame = cv2.resize(frame, (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
-                    
+            
                 cv2.imshow(self.windowName, frame)
+                
                 rval, frame = self.webcamFeed.read()
                 
                 if cv2.waitKey(17) == 27 or cv2.getWindowProperty(self.windowName, cv2.WND_PROP_VISIBLE) < 1:
                     closeProgram = True
                     break
+            
+                print("Frame:", i, "- FPS:", round(1 / (time.time() - startTime)))
+                i += 1
             
             # If program was closed wrongly
             if closeProgram == False:
