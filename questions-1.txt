@@ -7,6 +7,6 @@
 * Wenn ohne Licht, wie Farbe erkennen (W�rmebild-Kamera mit W�rmebildsignatur) - Licht gibt es immer (Kamera hat selbst Infrarot LED drauf)
 * Video Feed hat sich um 20:30 auf Grau gestellt und um 21:00 ausgeschaltet (Method SETUP failed: 406 Not Acceptable)
 
-* Graustufen Bild - Ellipsenerkennung einfacher
-* Ausfiltern
+* Graustufen Bild / Black White - Ellipsenerkennung einfacher
+* Ausfiltern mit Erosion
 * In Originalbild umkomvertieren & Inhalt der Ellipsenerkennung analysieren (Farbenhistogram)
