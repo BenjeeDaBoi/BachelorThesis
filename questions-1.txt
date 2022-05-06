@@ -1,8 +1,12 @@
-* Wie viele Hennen hat Patrick?
-* Welche Farben haben die Hühner?
-* Wie viele Eier legen die Hennen pro Tag?
-* Gibt es ähnliche Eier in der Farbe?
+* Wie viele Hennen hat Patrick? 4, bald (nÃ¤chste Woche aber keine Eier)
+* HÃ¶chstens 3 Hennen legen Eier (GrÃ¼n + 2 Beige)
+* Wie viele Eier legen die Hennen pro Tag? (max. 1)
+* Gibt es ï¿½hnliche Eier in der Farbe? (italienische HÃ¼hner)
 * Wann legen die Hennen Eier? (Bei Licht, Ohne Licht?)
-* Wann nimmt Patrick die Eier weg?
-* Wenn ohne Licht, wie Farbe erkennen (Wärmebild-Kamera mit Wärmebildsignatur)?
+* Wann nimmt Patrick die Eier weg? (sporadisch)
+* Wenn ohne Licht, wie Farbe erkennen (Wï¿½rmebild-Kamera mit Wï¿½rmebildsignatur) - Licht gibt es immer (Kamera hat selbst Infrarot LED drauf)
 * Video Feed hat sich um 20:30 auf Grau gestellt und um 21:00 ausgeschaltet (Method SETUP failed: 406 Not Acceptable)
+
+* Graustufen Bild - Ellipsenerkennung einfacher
+* Ausfiltern
+* In Originalbild umkomvertieren & Inhalt der Ellipsenerkennung analysieren (Farbenhistogram)
