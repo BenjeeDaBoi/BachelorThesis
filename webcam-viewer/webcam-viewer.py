@@ -1,8 +1,9 @@
 from threading import Thread
 from dotenv import load_dotenv
 from datetime import datetime
-import time
+from time import sleep
 
+import time
 import cv2
 import os
 
@@ -29,7 +30,6 @@ class WebcamViewer:
         
         # Frame Counter
         i = 1
-        fps = 0
         
         # Crash Handling
         closeProgram = False
@@ -46,7 +46,7 @@ class WebcamViewer:
                 
                 startTime = time.time()
                 rval, frame = self.webcamFeed.read()
-                if rval == None:
+                if not rval:
                     break
             
                 frame = cv2.resize(frame, (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
@@ -59,12 +59,13 @@ class WebcamViewer:
                     closeProgram = True
                     break
             
-                print("Frame:", i, "- FPS:", round(1 / (time.time() - startTime)))
+                cv2.setWindowTitle(self.windowName, self.windowName + " (Frame: " + str(i) + " | FPS: " + str(round(1 / (time.time() - startTime))) + ")")
                 i += 1
             
             # If program was closed wrongly
             if closeProgram == False:
                 print("[ERROR] [", datetime.now().strftime('%H:%M:%S'), "] No Connection to RTSP Stream, reconnecting in 3 seconds. . .")
+                cv2.setWindowTitle(self.windowName, self.windowName + " (Reconnecting to RTSP)")
                 sleep(3)
             else:
                 print("[DEBUG] Ending RTSP Stream . . .")
@@ -74,7 +75,7 @@ class WebcamViewer:
                 cv2.destroyAllWindows()
 
                 print("[DEBUG] Ending program . . .")
-                exit()
+                break
                     
 
 test = WebcamViewer()
