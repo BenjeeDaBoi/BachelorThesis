@@ -34,6 +34,8 @@ class WebcamViewer:
             cv2.namedWindow(self.windowName, cv2.WINDOW_AUTOSIZE)
             self.webcamFeed = cv2.VideoCapture(self.WEBCAM_RTSP_LINK, cv2.CAP_FFMPEG)
             
+            print("[DEBUG] Connection to RTSP established")
+            
             rval, frame = self.webcamFeed.read()
             
             while rval:
@@ -49,7 +51,7 @@ class WebcamViewer:
             
             # If program was closed wrongly
             if closeProgram == False:
-                print("[ERROR] [", datetime.now().strftime('%H:%M:%S'), "] Not Connection to RTSP Stream, reconnecting in 3 seconds. . .")
+                print("[ERROR] [", datetime.now().strftime('%H:%M:%S'), "] No Connection to RTSP Stream, reconnecting in 3 seconds. . .")
                 sleep(3)
             else:
                 print("[DEBUG] Ending RTSP Stream . . .")
