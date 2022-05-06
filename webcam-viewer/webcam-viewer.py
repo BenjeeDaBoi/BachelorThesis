@@ -34,7 +34,7 @@ class WebcamViewer:
             cv2.namedWindow(self.windowName, cv2.WINDOW_AUTOSIZE)
             self.webcamFeed = cv2.VideoCapture(self.WEBCAM_RTSP_LINK, cv2.CAP_FFMPEG)
             
-            print("[DEBUG] Connection to RTSP established")
+            print("[DEBUG] [", datetime.now().strftime('%H:%M:%S'), "] Connection to RTSP established")
             
             rval, frame = self.webcamFeed.read()
             
