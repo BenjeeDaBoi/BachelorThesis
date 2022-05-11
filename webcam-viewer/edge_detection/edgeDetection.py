@@ -1,5 +1,7 @@
 import cv2
 
+from skimage.transform import hough_ellipse
+
 blur_strength = 1
 hysteresis_threshold = 1
 
@@ -39,8 +41,8 @@ cv2.createTrackbar("Hysteresis Threshold", "Edge Detection", 1, 250, on_hysteres
 
 webcamFeed = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
-webcamFeed.set(cv2.CAP_PROP_FRAME_WIDTH, 852)
-webcamFeed.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+webcamFeed.set(cv2.CAP_PROP_FRAME_WIDTH, 852) # 852
+webcamFeed.set(cv2.CAP_PROP_FRAME_HEIGHT, 480) # 480
 
 while True:
 
