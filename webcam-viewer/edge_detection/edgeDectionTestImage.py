@@ -1,9 +1,11 @@
 import cv2
+from cv2 import THRESH_BINARY
 
 from skimage.transform import hough_ellipse
 
 blur_strength = 1
 hysteresis_threshold = 1
+threshold_value = 0
 
 def on_blur_change(value):
       
@@ -13,7 +15,10 @@ def on_blur_change(value):
   global blur_strength
   blur_strength = value
   
+def on_threshold_change(value):
   
+  global threshold_value
+  threshold_value = value
   
 def on_hysteresis_change(value):
   global hysteresis_threshold
@@ -23,8 +28,8 @@ def detectContourEgg(frame):
   
   # Remove unnecessary patterns that could disrupt the detection
   frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-  frame = cv2.GaussianBlur(frame, (blur_strength,blur_strength), 0)
-  
+  frame = cv2.GaussianBlur(frame, (blur_strength,blur_strength), 1)
+  _, frame = cv2.threshold(frame, threshold_value, 255, THRESH_BINARY)
   # Edge Detection (https://docs.opencv.org/3.4/db/df6/tutorial_erosion_dilatation.html)
   frame = cv2.Canny(frame, hysteresis_threshold, hysteresis_threshold)
   #frame = cv2.dilate(frame, None, iterations = 1)
@@ -38,6 +43,7 @@ cv2.namedWindow("Edge Detection", cv2.WINDOW_AUTOSIZE)
 	
 cv2.createTrackbar("Blur Strength", "Edge Detection", 1, 50, on_blur_change)
 cv2.createTrackbar("Hysteresis Threshold", "Edge Detection", 1, 250, on_hysteresis_change)
+cv2.createTrackbar("Thresholding", "Edge Detection", 0, 255, on_threshold_change)
 
 frame = cv2.imread("source.PNG")
 height, width, channels = frame.shape

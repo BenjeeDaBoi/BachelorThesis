@@ -14,7 +14,7 @@ def __simpleBWErosion(image):
     #(thresh, image) = cv2.threshold(image, 80, 255, cv2.THRESH_BINARY)
     #__showImage__('Black & White Image', image)
   
-    cv2.imwrite('./full_egg_grayscale.png', image) 
+    cv2.imwrite('../source.PNG', image) 
     
     cv2.waitKey(0)
     cv2.destroyAllWindows()

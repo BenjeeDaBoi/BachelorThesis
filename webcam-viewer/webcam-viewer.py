@@ -64,7 +64,6 @@ class WebcamViewer:
                     break
             
                 frame = cv2.resize(frame, (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
-                frame = frame[255:460, 500:845]
             
                 cv2.imshow(self.windowName, frame)
                 
