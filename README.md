@@ -12,10 +12,12 @@ Topic: "Erkennung und Klassifizierung von Eiern: Diskussion & Vergleiche von unt
 ### How to Install Detectron2 0.1.3
 
 * Source-Code herunterladen: https://github.com/facebookresearch/detectron2/releases/tag/v0.1.3
-* Außerhalb des extrahierten detectron2 Verzeichnisses: python -m pip install -e detectron2
+* Außerhalb des extrahierten detectron2 Verzeichnisses: py -m pip install -e detectron2
+(Falls py nicht geht: "python" verwenden)
 
 ## Auführen von Dateien
 * py [python-file.py]
+(Falls py nicht geht: "python" verwenden)
 
 **Verwende am besten VSCode zur besseren Darstellung**
 
