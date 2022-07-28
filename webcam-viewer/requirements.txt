@@ -1,3 +1,0 @@
-### Required Libraries for Webcam Viewer ###
-opencv-python
-python-dotenv

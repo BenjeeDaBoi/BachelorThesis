@@ -1,0 +1,5 @@
+### Required Libraries for Image Processing Experiments ###
+opencv-python
+python-dotenv
+scikit-image
+matplotlib

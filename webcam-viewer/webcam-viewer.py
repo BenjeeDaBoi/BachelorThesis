@@ -1,7 +1,20 @@
+# Webcam Viewer (& Data Collector + ModelImpl)
+# zur Ermoeglichung der Bachelorarbeit
+
+# Livestream und Modelvorhersage von Patrick's Hennenstall
+# inkl. dem Eiernest
+
+# geschrieben von Benjamin H.
+# Studiengang: Informatik - Software & Information Engineering
+# 6. Semester - Sommersemester 2022
+
 from threading import Event, Thread
 from dotenv import load_dotenv
 from datetime import datetime
 from time import sleep
+
+# Model Implementation
+from modelImpl import *
 
 import time
 import cv2
@@ -10,9 +23,9 @@ import os
 
 class WebcamViewer:
 
-    ### Resolution: 720p ###
-    WINDOW_WIDTH     = 1280
-    WINDOW_HEIGHT    = 720
+    ### Resolution: 480p ###
+    WINDOW_WIDTH     = 854
+    WINDOW_HEIGHT    = 480
     
     ### Important Attributes ###
     windowName       = "PatEggAI v0.2 - by Benjamin Hartmann"
@@ -21,6 +34,10 @@ class WebcamViewer:
     
     stopFlag                  = None
     pauseDataCollectionThread = False
+    
+    # Debug Flags
+    collectData               = False
+    showPredictions           = False
     
     def __init__(self):
         
@@ -40,7 +57,11 @@ class WebcamViewer:
     def __connectHandleWebcamFeed__(self):
         
         # Collection of Data
-        self.__startDataCollectionThread__()
+        if (self.collectData == True):
+            self.__startDataCollectionThread__()
+        
+        # Preparing Object Detector
+        detector = FasterRCNNDetector()
         
         # Frame Counter
         i = 1
@@ -64,6 +85,9 @@ class WebcamViewer:
                     break
             
                 frame = cv2.resize(frame, (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
+            
+                if self.showPredictions == True:
+                    frame = detector.webcamDetection(frame)
             
                 cv2.imshow(self.windowName, frame)
                 
@@ -93,17 +117,19 @@ class WebcamViewer:
                 cv2.destroyAllWindows()
 
                 # Stop collecting data
-                self.__stopDataCollectionThread__()
+                if (self.collectData == True):
+                    self.__stopDataCollectionThread__()
 
                 print("[DEBUG] Ending program . . .")
                 break
               
-    # Collecting images for YOLO
+    # Collecting images for Faster-RCNN
     class DataCollector(Thread):
         
+        # Initialize Object
         def __init__(self, event, obj):
             self.outerInstance = obj
-            Thread.__init__(self)
+            Thread.__init__(self) # Start Thread
             self.stopped = event
         
         def run(self):
@@ -111,11 +137,12 @@ class WebcamViewer:
             i = 0
             path = os.path.dirname(os.path.realpath(__file__)) + '\\eggImages\\'
             
-            while os.path.exists(path + 'eggSample%s.png' % i):
+            # When re-starting DataCollector, get highest number
+            while os.path.exists(path + 'eggSample%s.tiff' % i):
                 i += 1
             
+            # Repeat this process every 15 minutes
             while not self.stopped.wait(900):
-                print(str(i))
                 if self.outerInstance.pauseDataCollectionThread == False:
                     # Retrieve the current frame (.read() returns next frame)
                     rval, frame = self.outerInstance.webcamFeed.retrieve()
@@ -125,7 +152,7 @@ class WebcamViewer:
                     print(path + 'eggSample%s.png' % i)
                     
                     # Write new sample into collection folder
-                    cv2.imwrite(path + 'eggSample%s.png' % i, frame)
+                    cv2.imwrite(path + 'eggSample%s.tiff' % i, frame)
                     print("[DEBUG] [", datetime.now().strftime('%H:%M:%S'), "] Collected new egg sample (Nr.", i, ")")
                     
                     i += 1
