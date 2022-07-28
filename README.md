@@ -9,6 +9,11 @@ Topic: "Erkennung und Klassifizierung von Eiern: Diskussion & Vergleiche von unt
 * pip install -r requirements.txt
 * .env Datei im Rootverzeichnis erstellen mit folgendem Syntax: rtsp://USERNAME:PASSWORT@RTSP-LINK
 
+### How to Install Detectron2 0.1.3
+
+* Source-Code herunterladen: https://github.com/facebookresearch/detectron2/releases/tag/v0.1.3
+* Außerhalb des extrahierten detectron2 Verzeichnisses: python -m pip install -e detectron2
+
 ## Auführen von Dateien
 * py [python-file.py]
 
