@@ -28,8 +28,6 @@ Topic: "Erkennung und Klassifizierung von Eiern: Diskussion & Vergleiche von unt
 * py [python-file.py]
 (Falls py nicht geht: "python" verwenden)
 
-**Verwende am besten VSCode zur besseren Darstellung**
-
 ## Dokumentation
 
 Dokumentation erfolgte über LaTex mithilfe von TeXStudio.
