@@ -6,7 +6,7 @@ Topic: "Erkennung und Klassifizierung von Eiern: Diskussion & Vergleiche von unt
 
 * Git Repo herunterladen
 * Python 3.9.5 64-Bit installieren
-* pip install -r requirements.txt
+* pip install -r requirements.txt im Root Verzeichnis
 * .env Datei im Rootverzeichnis erstellen mit folgendem Syntax: rtsp://USERNAME:PASSWORT@RTSP-LINK
 
 ### How to Install Detectron2 0.1.3
