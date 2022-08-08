@@ -36,8 +36,8 @@ class WebcamViewer:
     pauseDataCollectionThread = False
     
     # Debug Flags
-    collectData               = False
-    showPredictions           = False
+    collectData               = False # Enable for DataCollector
+    showPredictions           = False # Enable for Predictions on WebcamViewer
     
     def __init__(self):
         
