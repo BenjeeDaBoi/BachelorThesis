@@ -1,7 +1,8 @@
-# How to Launch
+# How to Launch & Train Model Yourself
 
-Either:
+Entweder:
 * [**Preferred for Model Training**]: Use Google Collab: https://colab.research.google.com/
 * Install Jupyter Notebook: https://jupyter.org/
 
-Exported Model CFG and Output Folder into webcam-viewer/model
+Resultat der Modell-Trainings erstellt eine Model CFG Datei und einen Output Folder.
+Diese Dateien in den webcam-viewer/model eingeben.
