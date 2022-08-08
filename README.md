@@ -30,4 +30,5 @@ Topic: "Erkennung und Klassifizierung von Eiern: Diskussion & Vergleiche von unt
 
 ## Dokumentation
 
-Dokumentation erfolgte über LaTex mithilfe von TeXStudio.
+Dokumentation erfolgte über LaTex mithilfe von TeXStudio.  
+Aus datenschutzrechtlichen Gründen und eigener Sicherheit ist das Bachelorarbeitdokument samt Tex-Source auf diesem Repo nicht verfügbar.
