@@ -6,8 +6,17 @@ Topic: "Erkennung und Klassifizierung von Eiern: Diskussion & Vergleiche von unt
 
 * Git Repo herunterladen
 * Python 3.9.5 64-Bit installieren
-* pip install -r requirements.txt im Root Verzeichnis
-* .env Datei im Rootverzeichnis erstellen mit folgendem Syntax: rtsp://USERNAME:PASSWORT@RTSP-LINK
+* pip install -r requirements.txt im Root Verzeichnis des Projekts
+* .env Datei im Rootverzeichnis des Projekts erstellen mit folgendem Syntax: rtsp://USERNAME:PASSWORT@RTSP-LINK
+
+### Alternative / Optional: Anaconda installieren und eigene Environment erstellen
+
+* Git Repo herunterladen
+* Anaconda installieren: https://www.anaconda.com/products/distribution
+* Erstellen eines Python Environments: conda create --name thesiseggs (Falls conda proceed fragt => y)
+* In die Environment gehen: conda activate thesiseggs
+* pip install -r requirements.txt im Root Verzeichnis des Projekts
+* .env Datei im Rootverzeichnis des Projekts erstellen mit folgendem Syntax: rtsp://USERNAME:PASSWORT@RTSP-LINK
 
 ### How to Install Detectron2 0.1.3
 
